@@ -1,55 +1,58 @@
-const {User} = require('../models');
+const { User } = require('../models');
 
-module.exports.createUser =  async (req, res, next) =>{
+module.exports.createUser = async (req, res, next) => {
   try {
-    const {body} = req;
+    const { body } = req;
     const createdUser = await User.create(body);
-    res.status(201).send({data:createdUser});
+    res.status(201).send({ data: createdUser });
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
-module.exports.getAllUsers = async (req, res, next) =>{
+module.exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll({ 
-      where:{
+    const users = await User.findAll({
+      where: {
         //firstName:'Elon'
       },
-      attributes: { 
-        exclude: ['password'] 
-      }
+      attributes: {
+        exclude: ['password'],
+      },
     });
-    res.status(200).send({data:users});
+    res.status(200).send({ data: users });
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
-module.exports.updateUser = async (req, res, next) =>{
+module.exports.updateUser = async (req, res, next) => {
   try {
-    const {body, params:{id}} = req;
-    const [rows, [updatedUser] ] = await User.update(body, {
-      where: {id},
-      returning:true
+    const {
+      body,
+      params: { userId },
+    } = req;
+    const [rows, [updatedUser]] = await User.update(body, {
+      where: { id: userId },
+      returning: true,
     });
     updatedUser.password = undefined;
-    res.status(200).send({data:updatedUser});
+    res.status(200).send({ data: updatedUser });
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
-module.exports.updateUserInstance = async (req, res, next) =>{
+module.exports.updateUserInstance = async (req, res, next) => {
   try {
-    const {body, userInstance} = req;
+    const { body, userInstance } = req;
     //const userInstance = await User.findByPk(id);
-    const updatedUser = await userInstance.update(body,{
-      returning:true
+    const updatedUser = await userInstance.update(body, {
+      returning: true,
     });
     updatedUser.password = undefined;
-    res.status(200).send({data:updatedUser});
+    res.status(200).send({ data: updatedUser });
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};

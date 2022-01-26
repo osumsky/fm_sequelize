@@ -1,7 +1,6 @@
 {
   "name": "fm_sequelize",
   "version": "1.0.0",
-  "description": "",
   "private": true,
   "scripts": {
     "start": "nodemon ./server.js"
@@ -20,5 +19,15 @@
   "devDependencies": {
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freshjsftm/sequelize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/freshjsftm/sequelize/issues"
+  },
+  "homepage": "https://github.com/freshjsftm/sequelize#readme",
+  "description": ""
 }
