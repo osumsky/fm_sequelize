@@ -6,8 +6,9 @@ app.use(express.json());
 app.use('/api', router);
 
 app.use((err, req, res, next) => {
-  res.status(500).send({
-    errors: [{ message: err.message }],
+  const statusError = err.status || 500;
+  res.status(statusError).send({
+    errors: [{ message: err.message || 'Internal Server Error'}],
   });
 });
 

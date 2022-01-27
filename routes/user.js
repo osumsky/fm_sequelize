@@ -6,7 +6,7 @@ const pagination = require('../middlewares/pagination.mw');
 const userRouter = Router();
 userRouter.post('/', UserController.createUser);
 userRouter.get('/', pagination, UserController.getAllUsers);
-//userRouter.get('/', UserController.getlUser);
+userRouter.get('/:userId', UserController.getUser);
 userRouter.patch('/:userId', UserController.updateUser);
 userRouter.patch('/v2/:userId', checkUser, UserController.updateUserInstance);
 //userRouter.delete('/:userId', checkUser, UserController.deleteUser);
