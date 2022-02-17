@@ -5,7 +5,6 @@ const multer = require('multer');
 
 // const upload = multer({ dest: path.resolve(__dirname, '../public/images') });
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.resolve(__dirname, '../public/images'));
@@ -24,5 +23,6 @@ groupRouter.post(
   upload.single('image'),
   GroupController.createImageForGroup
 );
+groupRouter.post('/:groupId', GroupController.addUserToGroup);
 
 module.exports = groupRouter;

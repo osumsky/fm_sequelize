@@ -4,8 +4,9 @@ module.exports = async (req, res, next) => {
     const {
       query: { limit, offset },
     } = req;
+    console.log(limit, offset);
     req.pagination = {
-      limit: limit > MAX_LIMIT || limit <= 0 ? MAX_LIMIT : limit,
+      limit: limit > MAX_LIMIT || limit <= 0 || limit === undefined ? MAX_LIMIT : limit,
       offset: offset <= 0 ? 0 : offset,
     };
     next();

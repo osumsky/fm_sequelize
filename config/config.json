@@ -8,6 +8,12 @@
     "seederStorage": "json",
     "migrationStorage": "json"
   },
-  "test": {},
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "fm_sequelize_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
   "production": {}
 }
