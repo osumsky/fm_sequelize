@@ -1,5 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
+const { isBefore } = require('date-fns');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,16 +15,46 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      fname: DataTypes.STRING,
-      lname: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.TEXT,
-      birthday: DataTypes.DATEONLY,
-      isMale: DataTypes.BOOLEAN,
+      fname: {
+        field: 'first_name',
+        allowNull: false,
+        type: DataTypes.STRING(64),
+        validate: { notNull: true, notEmpty: true },
+      },
+      lname: {
+        field: 'last_name',
+        allowNull: false,
+        type: DataTypes.STRING(128),
+        validate: { notNull: true, notEmpty: true },
+      },
+      email: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        validate: { notNull: true, notEmpty: true, isEmail: true },
+      },
+      password: {
+        field: 'password_hash',
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      birthday: {
+        type: DataTypes.DATEONLY,
+        validate: {
+          isDate: true,
+          isValidate(value) {
+            if (isBefore(new Date(), new Date(value)))
+              throw new Error('Birthday check error');
+          },
+        },
+      },
+      isMale: { field: 'is_male', allowNull: false, type: DataTypes.BOOLEAN },
     },
     {
       sequelize,
       modelName: 'User',
+      tableName: 'users',
+      underscored: true,
     }
   );
   return User;
