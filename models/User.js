@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
         field: 'password_hash',
         allowNull: false,
         type: DataTypes.TEXT,
+        set(value) {
+          this.setDataValue('password', 'hash_password'); // it needs to add a hash func
+        },
       },
       birthday: {
         type: DataTypes.DATEONLY,

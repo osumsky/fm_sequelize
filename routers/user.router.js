@@ -10,6 +10,10 @@ userRouter.get('/users', UserController.getAllUsers);
 userRouter
   .route('/user/:id')
   .delete(UserController.deleteUser)
-  .patch(UserController.patchUser);
+  .patch(UserController.updateUser);
+
+userRouter.route('/user-v2/:id')
+   .patch(UserController.updateUserInstance)
+   .delete(UserController.deleteUserInstance);
 
 module.exports = userRouter;

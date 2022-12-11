@@ -13,6 +13,7 @@ app.use('/api', userRouter);
 
 app.use((err, req, res, next) => {
   console.log('Error: ' + err);
+  res.status(500).end();
 });
 
 app.listen(PORT, () => {
