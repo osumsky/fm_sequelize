@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const TaskController = require('../controllers/task.controller');
 const UserController = require('../controllers/user.controller');
 const user = require('../models/user');
 
@@ -12,8 +13,11 @@ userRouter
   .delete(UserController.deleteUser)
   .patch(UserController.updateUser);
 
-userRouter.route('/user-v2/:id')
-   .patch(UserController.updateUserInstance)
-   .delete(UserController.deleteUserInstance);
+userRouter
+  .route('/user-v2/:id')
+  .patch(UserController.updateUserInstance)
+  .delete(UserController.deleteUserInstance);
+
+userRouter.post('/user/:id/task', TaskController.createTask);
 
 module.exports = userRouter;
