@@ -1,7 +1,6 @@
 {
   "name": "fm_sequelize",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index"
@@ -19,5 +18,14 @@
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.26.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osumsky/fm_sequelize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/osumsky/fm_sequelize/issues"
+  },
+  "homepage": "https://github.com/osumsky/fm_sequelize#readme",
+  "description": ""
 }
