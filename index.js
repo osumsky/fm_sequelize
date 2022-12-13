@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
 app.use('/api', userRouter);
 
 app.use((err, req, res, next) => {
-  console.log(err.message);
-  res.status(500).end();
+  // console.log(err.message);
+  res.status(500).end(err.message);
 });
 
 app.listen(PORT, () => {
