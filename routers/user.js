@@ -12,6 +12,7 @@ userRouter
 
 userRouter
   .route('/:userId')
+  .get(UserController.getUser)
   .delete(UserController.deleteUser)
   .patch(UserController.updateUser);
 

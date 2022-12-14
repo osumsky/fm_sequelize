@@ -13,7 +13,7 @@ app.use('/api', router);
 
 app.use((err, req, res, next) => {
   // console.log(err.message);
-  res.status(500).end(err.message);
+  res.status(err.status).end(err.message);
 });
 
 app.listen(PORT, () => {
