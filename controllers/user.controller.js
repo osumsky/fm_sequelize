@@ -15,10 +15,11 @@ module.exports.createUser = async (req, res, next) => {
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
-    const where = req.query;
+    const { pagination = {} } = req;
     const users = await User.findAll({
-      where,
+      where: {},
       attributes: { exclude: ['password'] },
+      ...pagination,
     });
     res.status(200).send({ data: users });
   } catch (err) {
@@ -45,10 +46,7 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.updateUserInstance = async (req, res, next) => {
   try {
-    const {
-      body,
-      userInstance
-    } = req;
+    const { body, userInstance } = req;
     const updatedUser = await userInstance.update(body, {
       returning: true,
     });

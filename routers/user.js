@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const UserController = require('../controllers/user.controller');
+const { pagination } = require('../middleware/paginate.mw');
 const { checkUser } = require('../middleware/user.mw');
 
 const userRouter = Router();
@@ -7,7 +8,7 @@ const userRouter = Router();
 userRouter
   .route('/')
   .post(UserController.createUser)
-  .get(UserController.getAllUsers);
+  .get(pagination, UserController.getAllUsers);
 
 userRouter
   .route('/:userId')
