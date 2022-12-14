@@ -62,11 +62,10 @@ module.exports.updateUserInstance = async (req, res, next) => {
 module.exports.deleteUser = async (req, res, next) => {
   try {
     const {
-      body: { id },
+      body: { userId },
     } = req;
-    const deletedUser = await User.delete(id);
-    if (deletedUser) res.status(201).send(deletedUser);
-    else res.status(400).send('Error on deleting user');
+    const deletedUser = await User.delete(userId);
+    res.status(201).send(`user with id=${userId} deleted`);
   } catch (err) {
     next(err);
   }
@@ -75,13 +74,13 @@ module.exports.deleteUser = async (req, res, next) => {
 module.exports.deleteUserInstance = async (req, res, next) => {
   try {
     const {
-      params: { id },
+      params: { userId },
     } = req;
-    const userInstance = await User.findByPk(id);
+    const userInstance = await User.findByPk(userId);
     if (userInstance) {
       const deletedUser = await userInstance.destroy({ returning: true });
       deletedUser.password = undefined;
-      res.status(201).send(deletedUser);
+      res.status(201).send(`user with id=${userId} deleted`);
     } else {
       res.status(404).send(`User with id=${id} not found`);
     }

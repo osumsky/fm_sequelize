@@ -20,7 +20,7 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'restrict',
-        onUpdate: 'cascade',
+        onDelete: 'cascade',
       },
       body: {
         allowNull: false,

@@ -1,5 +1,5 @@
 const express = require('express');
-const userRouter = require('./routers/user.router');
+const router = require('./routers');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.end('Hello from server');
 });
 
-app.use('/api', userRouter);
+app.use('/api', router);
 
 app.use((err, req, res, next) => {
   // console.log(err.message);
