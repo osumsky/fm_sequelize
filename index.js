@@ -12,8 +12,9 @@ app.get('/', (req, res) => {
 app.use('/api', router);
 
 app.use((err, req, res, next) => {
-  // console.log(err.message);
-  res.status(err.status).end(err.message);
+  const errStatus = err.status || 500;
+  const errMessage = err.message || 'Internal server error';
+  res.status(errStatus).end(errMessage);
 });
 
 app.listen(PORT, () => {

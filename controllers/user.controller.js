@@ -19,10 +19,10 @@ module.exports.getUser = async (req, res, next) => {
     const {
       params: { userId },
     } = req;
-    const returnedUser = await User.findByPk(userId, {
+    const user = await User.findByPk(userId, {
       attributes: { exclude: ['password'] },
     });
-    if (!returnedUser) {
+    if (!user) {
       next(createError(404, `User with id=${userId} not found`));
     }
     res.status(201).send({ data: user });
