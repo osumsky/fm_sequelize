@@ -35,3 +35,21 @@ module.exports.getGroupsByUser = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.createImageForGroup = async (req, res, next) => {
+  try {
+    const {
+      file: { filename },
+      params: { groupId },
+    } = req;
+
+    const [count, [updatedGroup]] = await Group.update(
+      { imagePath: filename },
+      { where: { id: groupId }, returning: true }
+    );
+
+    res.send(req.file);
+  } catch (err) {
+    next(err);
+  }
+};
