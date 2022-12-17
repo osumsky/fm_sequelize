@@ -5,7 +5,9 @@
     "database": "fm_sequelize",
     "host": "localhost",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "seederStorage": "json",
+    "migrationStorage": "json"
   },
   "test": {},
   "production": {}
