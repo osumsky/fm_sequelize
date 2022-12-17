@@ -17,12 +17,13 @@ const upload = multer({ storage, limits: { fileSize: 2048 } });
 
 const groupRouter = Router();
 
-groupRouter.route('/').post(GroupController.createUserGroup);
-
-groupRouter.route('/:userId').get(GroupController.getGroupsByUser);
-
-groupRouter
-  .route('/:groupId/image')
-  .post(upload.single('image'), GroupController.createImageForGroup);
+groupRouter.get('/:userId', GroupController.getGroupsByUser);
+groupRouter.post('/', GroupController.createUserGroup);
+groupRouter.post(
+  '/:groupId/image',
+  upload.single('image'),
+  GroupController.createImageForGroup
+);
+groupRouter.post(':groupId', GroupController.addUserToGroup);
 
 module.exports = groupRouter;

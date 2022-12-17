@@ -53,3 +53,30 @@ module.exports.createImageForGroup = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.addUserToGroup = async (req, res, next) => {
+  try {
+    const {
+      params: { groupId },
+      body: { userId },
+    } = req;
+    const group = await Group.findByPk(groupId);
+    if (!group) {
+      next(createError(404, 'Group not found'));
+    }
+    const user = await User.findByPk(userId);
+    if (!user) {
+      next(createError(404, 'User not found'));
+    }
+    await group.addUser(user);
+
+    const groupWithUsers = await Group.findByPk(groupId, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: User, through: { attributes: [] } }],
+    });
+
+    res.status(201).send(groupWithUsers);
+  } catch (err) {
+    next(err);
+  }
+};
