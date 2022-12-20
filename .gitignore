@@ -3,3 +3,4 @@
 /node_modules/
 /uploads
 /sequelize*.json
+/sandbox.js

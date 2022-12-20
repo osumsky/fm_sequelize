@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const errorHandler = require('./middleware/error.handler.mw');
 const router = require('./routers');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.static('uploads'));
 app.use(express.json());
 

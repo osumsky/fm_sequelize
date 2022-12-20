@@ -8,7 +8,7 @@ module.exports.createUser = async (req, res, next) => {
     const returnedUser = await User.create(body);
     createdUser = returnedUser.get();
     createdUser.password = undefined;
-    res.status(201).send({ data: createdUser });
+    res.status(201).send({ data: [createdUser] });
   } catch (err) {
     next(err);
   }

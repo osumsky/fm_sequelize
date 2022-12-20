@@ -1,4 +1,4 @@
-const MAX_LIMIT = 5;
+const MAX_LIMIT = 100;
 
 module.exports.pagination = async (req, res, next) => {
   try {
